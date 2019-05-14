@@ -69,4 +69,16 @@ class ColumnController
         return $response->withJson($column);
     }
 
+    public function findByBoardId($request, $response, $args)
+    {
+        try {
+            $boardId = $args['boardId'];
+            $dao = new ColumnDAO;
+            $column = $dao->findByBoardId($boardId);
+        } catch (Exception $error) {
+            return $response->withStatus(500);
+        }
+        return $response->withJson($column);
+    }
+
 }
