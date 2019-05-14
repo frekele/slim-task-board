@@ -3,15 +3,15 @@
 class User
 {
     public $id;
-    public $fullName;
-    public $username;
+    public $name;
+    public $login;
     public $password;
 
-    function __construct($id, $fullName, $username, $password)
+    function __construct($id, $name, $login, $password)
     {
         $this->id = $id;
-        $this->fullName = $fullName;
-        $this->username = $username;
+        $this->name = $name;
+        $this->login = $login;
         $this->password = $password;
     }
 }
