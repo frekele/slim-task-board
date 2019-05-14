@@ -49,7 +49,7 @@ class UserDAO
         $stmt->execute();
         $users = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $users[] = new Users($row->id, $row->name, $row->login, $row->password);
+            $users[] = new User($row->id, $row->name, $row->login, $row->password);
         }
         return $users;
     }
