@@ -15,7 +15,7 @@ class UserController
             $var = $request->getParsedBody();
             $user = new User(0, $var['name'], $var['login'], $var['password']);
             $dao = new UserDAO;
-            $user = $dao->inserir($user);
+            $user = $dao->insert($user);
         } catch (Exception $error) {
             return $response->withStatus(500);
         }
