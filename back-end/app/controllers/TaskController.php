@@ -11,13 +11,13 @@ class TaskController
     {
         try {
             $p = $request->getParsedBody();
-            $toard = new Task(0, $p['name'], $p['description']);
+            $column = new Task(0, $p['columnId'], $p['name'], $p['weight'], $p['description'], $p['assignedUserId']);
             $dao = new TaskDAO;
-            $toard = $dao->insert($toard);
+            $toard = $dao->insert($column);
         } catch (Exception $error) {
             return $response->withStatus(500);
         }
-        return $response->withJson($toard, 201);
+        return $response->withJson($column, 201);
     }
 
     public function update($request, $response, $args)
@@ -25,13 +25,13 @@ class TaskController
         try {
             $id = $args['id'];
             $p = $request->getParsedBody();
-            $toard = new Task($id, $p['name'], $p['description']);
+            $column = new Task($id, $p['columnId'], $p['name'], $p['weight'], $p['description'], $p['assignedUserId']);
             $dao = new TaskDAO;
-            $toard = $dao->update($toard);
+            $column = $dao->update($column);
         } catch (Exception $error) {
             return $response->withStatus(500);
         }
-        return $response->withJson($toard);
+        return $response->withJson($column);
     }
 
     public function delete($request, $response, $args)
@@ -39,22 +39,22 @@ class TaskController
         try {
             $id = $args['id'];
             $dao = new TaskDAO;
-            $toard = $dao->delete($id);
+            $column = $dao->delete($id);
         } catch (Exception $error) {
             return $response->withStatus(500);
         }
-        return $response->withJson($toard);
+        return $response->withJson($column);
     }
 
     public function findAll($request, $response, $args)
     {
         try {
             $dao = new TaskDAO;
-            $toards = $dao->findAll();
+            $columns = $dao->findAll();
         } catch (Exception $error) {
             return $response->withStatus(500);
         }
-        return $response->withJson($toards);
+        return $response->withJson($columns);
     }
 
     public function findById($request, $response, $args)
@@ -62,11 +62,35 @@ class TaskController
         try {
             $id = $args['id'];
             $dao = new TaskDAO;
-            $toard = $dao->findById($id);
+            $column = $dao->findById($id);
         } catch (Exception $error) {
             return $response->withStatus(500);
         }
-        return $response->withJson($toard);
+        return $response->withJson($column);
+    }
+
+    public function findByColumnId($request, $response, $args)
+    {
+        try {
+            $columnId = $args['columnId'];
+            $dao = new TaskDAO;
+            $column = $dao->findByColumnId($columnId);
+        } catch (Exception $error) {
+            return $response->withStatus(500);
+        }
+        return $response->withJson($column);
+    }
+
+    public function findByAssignedUserId($request, $response, $args)
+    {
+        try {
+            $assignedUserId = $args['assignedUserId'];
+            $dao = new TaskDAO;
+            $column = $dao->findByAssignedUserId($assignedUserId);
+        } catch (Exception $error) {
+            return $response->withStatus(500);
+        }
+        return $response->withJson($column);
     }
 
 }
