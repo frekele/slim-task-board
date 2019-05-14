@@ -6,11 +6,12 @@ class TaskDAO
 {
     public function insert(Task $task)
     {
-        $query = "INSERT INTO task(column_id,name,description,assigned_user_id) VALUES (:columnId,:name,:description,:assignedUserId)";
+        $query = "INSERT INTO task(column_id,name,weight,description,assigned_user_id) VALUES (:columnId,:name,:weight,:description,:assignedUserId)";
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":columnId", $task->columnId);
         $stmt->bindParam(":name", $task->name);
+        $stmt->bindParam(":weight", $task->weight);
         $stmt->bindParam(":description", $task->description);
         $stmt->bindParam(":assignedUserId", $task->assignedUserId);
         $stmt->execute();
@@ -31,12 +32,13 @@ class TaskDAO
 
     public function update(Task $task)
     {
-        $query = "UPDATE task SET column_id=:columnId, name=:name, description=:description, assigned_user_id=:assignedUserId WHERE id=:id";
+        $query = "UPDATE task SET column_id=:columnId, name=:name, weight=:weight, description=:description, assigned_user_id=:assignedUserId WHERE id=:id";
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":id", $task->id);
         $stmt->bindParam(":columnId", $task->columnId);
         $stmt->bindParam(":name", $task->name);
+        $stmt->bindParam(":weight", $task->weight);
         $stmt->bindParam(":description", $task->description);
         $stmt->bindParam(":assignedUserId", $task->assignedUserId);
         $stmt->execute();
@@ -51,7 +53,7 @@ class TaskDAO
         $stmt->execute();
         $tasks = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $tasks[] = new Task($row->id, $row->columnId, $row->name, $row->description, $row->assignedUserId);
+            $tasks[] = new Task($row->id, $row->columnId, $row->name, $row->weight, $row->description, $row->assignedUserId);
         }
         return $tasks;
     }
@@ -64,7 +66,7 @@ class TaskDAO
         $stmt->bindParam('id', $id);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_OBJ);
-        return new Task($result->id, $result->columnId, $result->name, $result->description, $result->assignedUserId);
+        return new Task($result->id, $result->columnId, $result->name, $result->weight, $result->description, $result->assignedUserId);
     }
 
     public function findByColumnId($columnId)
@@ -75,7 +77,7 @@ class TaskDAO
         $stmt->bindParam('columnId', $columnId);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_OBJ);
-        return new Task($result->id, $result->columnId, $result->name, $result->description, $result->assignedUserId);
+        return new Task($result->id, $result->columnId, $result->name, $result->weight, $result->description, $result->assignedUserId);
     }
 
     public function findByAssignedUserId($assignedUserId)
@@ -86,6 +88,6 @@ class TaskDAO
         $stmt->bindParam('assignedUserId', $assignedUserId);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_OBJ);
-        return new Task($result->id, $result->columnId, $result->name, $result->description, $result->assignedUserId);
+        return new Task($result->id, $result->columnId, $result->name, $result->weight, $result->description, $result->assignedUserId);
     }
 }
