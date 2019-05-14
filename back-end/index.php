@@ -5,6 +5,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 include_once('./app/controllers/UserController.php');
 include_once('./app/controllers/BoardController.php');
+include_once('./app/controllers/ColumnController.php');
 include_once('./app/controllers/TaskController.php');
 require './vendor/autoload.php';
 
@@ -23,6 +24,17 @@ $app->group('/board', function () use ($app) {
     $app->get('/{id}', 'BoardController:findById');
     $app->put('/{id}', 'BoardController:update');
     $app->delete('/{id}', 'BoardController:delete');
+})->add('UserController:tokenValidate');
+
+
+//Column
+$app->group('/task', function () use ($app) {
+    $app->get('', 'ColumnController:findAll');
+    $app->post('', 'ColumnController:insert');
+
+    $app->get('/{id}', 'ColumnController:findById');
+    $app->put('/{id}', 'ColumnController:update');
+    $app->delete('/{id}', 'ColumnController:delete');
 })->add('UserController:tokenValidate');
 
 
