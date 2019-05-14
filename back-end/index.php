@@ -18,34 +18,34 @@ $app->post('/user', 'UserController:insert');
 
 //Board
 $app->group('/board', function () use ($app) {
-    $app->get('', 'BoardController:findAll');
     $app->post('', 'BoardController:insert');
-
-    $app->get('/{id}', 'BoardController:findById');
     $app->put('/{id}', 'BoardController:update');
     $app->delete('/{id}', 'BoardController:delete');
+    $app->get('', 'BoardController:findAll');
+    $app->get('/{id}', 'BoardController:findById');
 })->add('UserController:tokenValidate');
 
 
 //Column
 $app->group('/task', function () use ($app) {
-    $app->get('', 'ColumnController:findAll');
     $app->post('', 'ColumnController:insert');
-
-    $app->get('/{id}', 'ColumnController:findById');
     $app->put('/{id}', 'ColumnController:update');
     $app->delete('/{id}', 'ColumnController:delete');
+    $app->get('', 'ColumnController:findAll');
+    $app->get('/{id}', 'ColumnController:findById');
+    $app->get('/board/{boardId}', 'ColumnController:findByBoardId');
 })->add('UserController:tokenValidate');
 
 
 //Task
 $app->group('/task', function () use ($app) {
-    $app->get('', 'TaskController:findAll');
     $app->post('', 'TaskController:insert');
-
-    $app->get('/{id}', 'TaskController:findById');
     $app->put('/{id}', 'TaskController:update');
     $app->delete('/{id}', 'TaskController:delete');
+    $app->get('', 'TaskController:findAll');
+    $app->get('/{id}', 'TaskController:findById');
+    $app->get('/column/{columnId}', 'TaskController:findByColumnId');
+    $app->get('/user/{assignedUserId}', 'TaskController:findByAssignedUserId');
 })->add('UserController:tokenValidate');
 
 
