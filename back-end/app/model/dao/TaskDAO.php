@@ -31,7 +31,7 @@ class TaskDAO
 
     public function update(Task $task)
     {
-        $query = "UPDATE task SET column_id=:columnId, name=:name WHERE id=:id";
+        $query = "UPDATE task SET column_id=:columnId, name=:name, description=:description, assigned_user_id=:assignedUserId WHERE id=:id";
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":id", $task->id);
