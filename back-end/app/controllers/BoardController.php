@@ -11,13 +11,13 @@ class BoardController
     {
         try {
             $p = $request->getParsedBody();
-            $toard = new Board(0, $p['name'], $p['description']);
+            $board = new Board(0, $p['name'], $p['description']);
             $dao = new BoardDAO;
-            $toard = $dao->insert($toard);
+            $board = $dao->insert($board);
         } catch (Exception $error) {
             return $response->withStatus(500);
         }
-        return $response->withJson($toard, 201);
+        return $response->withJson($board, 201);
     }
 
     public function update($request, $response, $args)
@@ -25,13 +25,13 @@ class BoardController
         try {
             $id = $args['id'];
             $p = $request->getParsedBody();
-            $toard = new Board($id, $p['name'], $p['description']);
+            $board = new Board($id, $p['name'], $p['description']);
             $dao = new BoardDAO;
-            $toard = $dao->update($toard);
+            $board = $dao->update($board);
         } catch (Exception $error) {
             return $response->withStatus(500);
         }
-        return $response->withJson($toard);
+        return $response->withJson($board);
     }
 
     public function delete($request, $response, $args)
@@ -39,22 +39,22 @@ class BoardController
         try {
             $id = $args['id'];
             $dao = new BoardDAO;
-            $toard = $dao->delete($id);
+            $board = $dao->delete($id);
         } catch (Exception $error) {
             return $response->withStatus(500);
         }
-        return $response->withJson($toard);
+        return $response->withJson($board);
     }
 
     public function findAll($request, $response, $args)
     {
         try {
             $dao = new BoardDAO;
-            $toards = $dao->findAll();
+            $boards = $dao->findAll();
         } catch (Exception $error) {
             return $response->withStatus(500);
         }
-        return $response->withJson($toards);
+        return $response->withJson($boards);
     }
 
     public function findById($request, $response, $args)
@@ -62,11 +62,11 @@ class BoardController
         try {
             $id = $args['id'];
             $dao = new BoardDAO;
-            $toard = $dao->findById($id);
+            $board = $dao->findById($id);
         } catch (Exception $error) {
             return $response->withStatus(500);
         }
-        return $response->withJson($toard);
+        return $response->withJson($board);
     }
 
 }
