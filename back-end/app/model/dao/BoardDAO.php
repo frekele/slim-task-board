@@ -4,14 +4,13 @@ include_once '../core/PDOFactory.php';
 
 class BoardDAO
 {
-    public function insert(User $board)
+    public function insert(Board $board)
     {
-        $query = "INSERT INTO board(name,login,password) VALUES (:name,:login,:password)";
+        $query = "INSERT INTO board(name,description) VALUES (:name,:description)";
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":name", $board->name);
-        $stmt->bindParam(":login", $board->login);
-        $stmt->bindParam(":password", $board->password);
+        $stmt->bindParam(":description", $board->description);
         $stmt->execute();
         $board->id = $pdo->lastInsertId();
         return $board;
@@ -28,15 +27,14 @@ class BoardDAO
         return $board;
     }
 
-    public function update(User $board)
+    public function update(Board $board)
     {
-        $query = "UPDATE board SET name=:name, login=:login, password=:password WHERE id=:id";
+        $query = "UPDATE board SET name=:name, description=:description WHERE id=:id";
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":id", $board->id);
         $stmt->bindParam(":name", $board->name);
-        $stmt->bindParam(":login", $board->login);
-        $stmt->bindParam(":password", $board->password);
+        $stmt->bindParam(":description", $board->description);
         $stmt->execute();
         return $board;
     }
@@ -49,7 +47,7 @@ class BoardDAO
         $stmt->execute();
         $boards = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $boards[] = new Users($row->id, $row->name, $row->login, $row->password);
+            $boards[] = new Board($row->id, $row->name, $row->description);
         }
         return $boards;
     }
@@ -62,17 +60,6 @@ class BoardDAO
         $stmt->bindParam('id', $id);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_OBJ);
-        return new User($result->id, $result->name, $result->login, $result->password);
-    }
-
-    public function findByLogin($login)
-    {
-        $query = 'SELECT * FROM board WHERE login=:login';
-        $pdo = PDOFactory::getConnection();
-        $stmt = $pdo->prepare($query);
-        $stmt->bindParam('login', $login);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_OBJ);
-        return new User($result->id, $result->name, $result->login, $result->password);
+        return new Board($result->id, $result->name, $result->description);
     }
 }
