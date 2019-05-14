@@ -6,11 +6,12 @@ class ColumnDAO
 {
     public function insert(Column $column)
     {
-        $query = "INSERT INTO column(board_id,name) VALUES (:boardId,:name)";
+        $query = "INSERT INTO column(board_id,name,weight) VALUES (:boardId,:name,:weight)";
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":boardId", $column->boardId);
         $stmt->bindParam(":name", $column->name);
+        $stmt->bindParam(":weight", $column->weight);
         $stmt->execute();
         $column->id = $pdo->lastInsertId();
         return $column;
@@ -29,7 +30,7 @@ class ColumnDAO
 
     public function update(Column $column)
     {
-        $query = "UPDATE column SET board_id=:boardId, name=:name WHERE id=:id";
+        $query = "UPDATE column SET board_id=:boardId, name=:name, weight=:weight WHERE id=:id";
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":id", $column->id);
