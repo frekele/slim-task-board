@@ -3,10 +3,10 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-include_once('./app/controllers/UserController.php');
-include_once('./app/controllers/BoardController.php');
-include_once('./app/controllers/ColumnController.php');
-include_once('./app/controllers/TaskController.php');
+include_once('app/controllers/UserController.php');
+include_once('app/controllers/BoardController.php');
+include_once('app/controllers/ColumnController.php');
+include_once('app/controllers/TaskController.php');
 require './vendor/autoload.php';
 
 $app = new \Slim\App;
@@ -14,7 +14,7 @@ $app = new \Slim\App;
 //User
 $app->post('/auth', 'UserController:authenticate');
 $app->post('/user', 'UserController:insert');
-$app->post('/token-validate', 'UserController:tokenValidate');
+
 
 //Board
 $app->group('/board', function () use ($app) {
@@ -27,7 +27,7 @@ $app->group('/board', function () use ($app) {
 
 
 //Column
-$app->group('/column', function () use ($app) {
+$app->group('/task', function () use ($app) {
     $app->post('', 'ColumnController:insert');
     $app->put('/{id}', 'ColumnController:update');
     $app->delete('/{id}', 'ColumnController:delete');
