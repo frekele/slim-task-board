@@ -27,11 +27,11 @@ class UserController
     {
         $user = $request->getParsedBody();
         $dao = new UserDAO;
-        $user = $dao->findByLogin($user['login']);
-        if ($user->password == $user['password']) {
+        $userReturn = $dao->findByLogin($user['login']);
+        if ($userReturn->password == $user['password']) {
             $token = array(
-                'user' => strval($user->id),
-                'name' => $user->name
+                'user' => strval($userReturn->id),
+                'name' => $userReturn->name
             );
             $jwt = JWT::encode($token, $this->secretKey);
             return $response->withJson(["token" => $jwt], 201)
