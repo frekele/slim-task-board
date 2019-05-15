@@ -56,3 +56,8 @@
 ### GET /task/column/{columnId} (find by columnId)
 
 ### GET /task/assigned-user/{assignedUserId} (find by assignedUserId)
+
+
+# For TEST:
+
+- https://slim-task-board.herokuapp.com/
