@@ -2,7 +2,7 @@
 
 include_once './app/model/entity/Board.php';
 include_once './app/model/dao/BoardDAO.php';
-
+include_once './app/model/dao/ColumnDAO.php';
 
 class BoardController
 {
@@ -66,13 +66,18 @@ class BoardController
     {
         try {
             $id = $args['id'];
+            $eager = $request->getQueryParam('eager');
             $dao = new BoardDAO;
             $board = $dao->findById($id);
+
+            if ($eager == 'true') {
+                $columnDAO = new ColumnDAO;
+                $board->columns = $columnDAO->findByBoardId($id);
+            }
         } catch (Exception $error) {
             var_dump($error->getMessage());
             return $response->withStatus(500);
         }
         return $response->withJson($board);
     }
-
 }
