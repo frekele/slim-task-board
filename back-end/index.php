@@ -53,7 +53,7 @@ $app->group('/task', function () use ($app) {
     $app->get('', 'TaskController:findAll');
     $app->get('/{id}', 'TaskController:findById');
     $app->get('/column/{columnId}', 'TaskController:findByColumnId');
-    $app->get('/user/{assignedUserId}', 'TaskController:findByAssignedUserId');
+    $app->get('/assigned-user/{assignedUserId}', 'TaskController:findByAssignedUserId');
 })->add('UserController:tokenValidate');
 
 
