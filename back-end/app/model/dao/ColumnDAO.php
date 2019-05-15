@@ -72,7 +72,10 @@ class ColumnDAO
         $stmt = $pdo->prepare($query);
         $stmt->bindParam('boardId', $boardId);
         $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_OBJ);
-        return new Column($result->id, $result->boardId, $result->name, $result->weight);
+        $columns = array();
+        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+            $columns[] = new Column($row->id, $row->boardId, $row->name, $row->weight);
+        }
+        return $columns;
     }
 }
