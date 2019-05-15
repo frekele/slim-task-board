@@ -11,10 +11,9 @@ class Task
     public $assignedUserId;
 
     //Only if Eager.
-    public $column;
     public $assignedUser;
 
-    function __construct($id, $columnId, $name, $weight, $description = null, $assignedUserId = null, $column = null, $assignedUser = null)
+    function __construct($id, $columnId, $name, $weight, $description = null, $assignedUserId = null, $assignedUser = null)
     {
         $this->id = $id;
         $this->columnId = $columnId;
@@ -22,7 +21,6 @@ class Task
         $this->weight = $weight;
         $this->description = $description;
         $this->assignedUserId = $assignedUserId;
-        $this->column = $column;
         $this->assignedUser = $assignedUser;
 
     }

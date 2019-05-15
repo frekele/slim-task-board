@@ -9,16 +9,14 @@ class Column
     public $weight;
 
     //Only if Eager.
-    public $board;
     public $tasks;
 
-    function __construct($id, $boardId, $name, $weight, $board = null, $tasks = null)
+    function __construct($id, $boardId, $name, $weight, $tasks = null)
     {
         $this->id = $id;
         $this->boardId = $boardId;
         $this->name = $name;
         $this->weight = $weight;
-        $this->board = $board;
         $this->tasks = $tasks;
     }
 }
