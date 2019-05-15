@@ -9,11 +9,10 @@ class Task
     public $weight;
     public $description;
     public $assignedUserId;
+    public $assignedUserName;
 
-    //Only if Eager.
-    public $assignedUser;
 
-    function __construct($id, $columnId, $name, $weight, $description = null, $assignedUserId = null, $assignedUser = null)
+    function __construct($id, $columnId, $name, $weight, $description = null, $assignedUserId = null, $assignedUserName = null)
     {
         $this->id = $id;
         $this->columnId = $columnId;
@@ -21,7 +20,6 @@ class Task
         $this->weight = $weight;
         $this->description = $description;
         $this->assignedUserId = $assignedUserId;
-        $this->assignedUser = $assignedUser;
-
+        $this->assignedUserName = $assignedUserName;
     }
 }
