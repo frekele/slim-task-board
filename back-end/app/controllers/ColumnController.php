@@ -85,9 +85,9 @@ class ColumnController
             $boardId = $args['boardId'];
             $eager = $request->getQueryParam('eager');
             $dao = new ColumnDAO;
-            $column = $dao->findByBoardId($boardId);
-            if ($eager == 'true' && !empty($column)) {
-                foreach ($column as &$column) {
+            $columns = $dao->findByBoardId($boardId);
+            if ($eager == 'true' && !empty($columns)) {
+                foreach ($columns as &$column) {
                     $taskDAO = new TaskDAO;
                     $column->tasks = $taskDAO->findByColumnId($column->id);
                 }
@@ -96,7 +96,7 @@ class ColumnController
             var_dump($error->getMessage());
             return $response->withStatus(500);
         }
-        return $response->withJson($column);
+        return $response->withJson($columns);
     }
 
 }
