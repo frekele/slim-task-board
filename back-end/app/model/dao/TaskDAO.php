@@ -47,52 +47,56 @@ class TaskDAO
 
     public function findAll()
     {
-        $query = 'SELECT * FROM slim_task';
+        $query = 'SELECT t.*, u.name as assigned_user_name FROM slim_task t LEFT JOIN slim_user AS u ON t.assigned_user_id = u.id';
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->execute();
         $tasks = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $tasks[] = new Task($row->id, $row->column_id, $row->name, $row->weight, $row->description, $row->assigned_user_id);
+            $tasks[] = new Task($row->id, $row->column_id, $row->name, $row->weight,
+                $row->description, $row->assigned_user_id, $row->assigned_user_name);
         }
         return $tasks;
     }
 
     public function findById($id)
     {
-        $query = 'SELECT * FROM slim_task WHERE id=:id';
+        $query = 'SELECT t.*, u.name as assigned_user_name FROM slim_task t LEFT JOIN slim_user AS u ON t.assigned_user_id = u.id WHERE t.id=:id';
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam('id', $id);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_OBJ);
-        return ((!$result) ? null : new Task($result->id, $result->column_id, $result->name, $result->weight, $result->description, $result->assigned_user_id));
+        return ((!$result) ? null : new Task($result->id, $result->column_id, $result->name, $result->weight,
+            $result->description, $result->assigned_user_id, $result->assigned_user_name));
     }
 
     public function findByColumnId($columnId)
     {
-        $query = 'SELECT * FROM slim_task WHERE column_id=:columnId';
+        $query = 'SELECT t.*, u.name as assigned_user_name FROM slim_task t LEFT JOIN slim_user AS u ON t.assigned_user_id = u.id WHERE t.column_id=:columnId';
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam('columnId', $columnId);
         $stmt->execute();
         $tasks = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $tasks[] = new Task($row->id, $row->column_id, $row->name, $row->weight, $row->description, $row->assigned_user_id);
+            $tasks[] = new Task($row->id, $row->column_id, $row->name, $row->weight,
+                $row->description, $row->assigned_user_id, $row->assigned_user_name);
         }
         return $tasks;
     }
 
     public function findByAssignedUserId($assignedUserId)
     {
-        $query = 'SELECT * FROM slim_task WHERE assigned_user_id=:assignedUserId';
+        $query = 'SELECT t.*, u.name as assigned_user_name FROM slim_task t LEFT JOIN slim_user AS u ON t.assigned_user_id = u.id WHERE t.assigned_user_id=:assignedUserId';
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam('assignedUserId', $assignedUserId);
         $stmt->execute();
         $tasks = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $tasks[] = new Task($row->id, $row->column_id, $row->name, $row->weight, $row->description, $row->assigned_user_id);
+            $tasks[] = new Task($row->id, $row->column_id, $row->name, $row->weight,
+                $row->description, $row->assigned_user_id, $row->assigned_user_name);
         }
         return $tasks;
     }
