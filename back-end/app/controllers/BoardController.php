@@ -3,6 +3,7 @@
 include_once './app/model/entity/Board.php';
 include_once './app/model/dao/BoardDAO.php';
 include_once './app/model/dao/ColumnDAO.php';
+include_once './app/model/dao/TaskDAO.php';
 
 class BoardController
 {
@@ -73,6 +74,12 @@ class BoardController
             if ($eager == 'true') {
                 $columnDAO = new ColumnDAO;
                 $board->columns = $columnDAO->findByBoardId($id);
+                if (!empty($board->columns)) {
+                    foreach ($board->columns as &$column) {
+                        $taskDAO = new TaskDAO;
+                        $column->tasks = $taskDAO->findByColumnId($column->id);
+                    }
+                }
             }
         } catch (Exception $error) {
             var_dump($error->getMessage());
