@@ -9,7 +9,15 @@ include_once('app/controllers/ColumnController.php');
 include_once('app/controllers/TaskController.php');
 require './vendor/autoload.php';
 
-$app = new \Slim\App;
+$config = [
+    'settings' => [
+        'displayErrorDetails' => true, // set to false in production
+        'addContentLengthHeader' => false, // Allow the web server to send the content-length header
+
+    ],
+];
+
+$app = new \Slim\App($config);
 
 //User
 $app->post('/auth', 'UserController:authenticate');
