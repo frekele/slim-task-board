@@ -27,7 +27,7 @@ $app->group('/board', function () use ($app) {
 
 
 //Column
-$app->group('/task', function () use ($app) {
+$app->group('/column', function () use ($app) {
     $app->post('', 'ColumnController:insert');
     $app->put('/{id}', 'ColumnController:update');
     $app->delete('/{id}', 'ColumnController:delete');
