@@ -32,7 +32,13 @@ class UserController
             $user = new User(0, $var['name'], $var['login'], $var['password']);
             $this->validate($user);
             $dao = new UserDAO;
-            $user = $dao->insert($user);
+
+            $userExist = $dao->findByLogin($var['login']);
+            if ($userExist) {
+                throw new Exception("This login already exists!");
+            } else {
+                $user = $dao->insert($user);
+            }
         } catch (Exception $error) {
             var_dump($error->getMessage());
             return $response->withStatus(500);
