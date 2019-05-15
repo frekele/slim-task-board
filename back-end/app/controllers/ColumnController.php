@@ -2,7 +2,7 @@
 
 include_once './app/model/entity/Column.php';
 include_once './app/model/dao/ColumnDAO.php';
-
+include_once './app/model/dao/TaskDAO.php';
 
 class ColumnController
 {
@@ -65,8 +65,13 @@ class ColumnController
     {
         try {
             $id = $args['id'];
+            $eager = $request->getQueryParam('eager');
             $dao = new ColumnDAO;
             $column = $dao->findById($id);
+            if ($eager == 'true') {
+                $taskDAO = new TaskDAO;
+                $column->tasks = $taskDAO->findByColumnId($column->id);
+            }
         } catch (Exception $error) {
             var_dump($error->getMessage());
             return $response->withStatus(500);
@@ -78,8 +83,15 @@ class ColumnController
     {
         try {
             $boardId = $args['boardId'];
+            $eager = $request->getQueryParam('eager');
             $dao = new ColumnDAO;
             $column = $dao->findByBoardId($boardId);
+            if ($eager == 'true' && !empty($column)) {
+                foreach ($column as &$column) {
+                    $taskDAO = new TaskDAO;
+                    $column->tasks = $taskDAO->findByColumnId($column->id);
+                }
+            }
         } catch (Exception $error) {
             var_dump($error->getMessage());
             return $response->withStatus(500);
