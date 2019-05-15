@@ -41,12 +41,12 @@ class TaskController
         try {
             $id = $args['id'];
             $dao = new TaskDAO;
-            $column = $dao->delete($id);
+            $dao->delete($id);
         } catch (Exception $error) {
             var_dump($error->getMessage());
             return $response->withStatus(500);
         }
-        return $response->withJson($column);
+        return $response->withStatus(204);
     }
 
     public function findAll($request, $response, $args)

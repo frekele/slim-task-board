@@ -41,12 +41,12 @@ class BoardController
         try {
             $id = $args['id'];
             $dao = new BoardDAO;
-            $board = $dao->delete($id);
+            $dao->delete($id);
         } catch (Exception $error) {
             var_dump($error->getMessage());
             return $response->withStatus(500);
         }
-        return $response->withJson($board);
+        return $response->withStatus(204);
     }
 
     public function findAll($request, $response, $args)
@@ -54,6 +54,7 @@ class BoardController
         try {
             $dao = new BoardDAO;
             $boards = $dao->findAll();
+            var_dump($dao);
         } catch (Exception $error) {
             var_dump($error->getMessage());
             return $response->withStatus(500);
