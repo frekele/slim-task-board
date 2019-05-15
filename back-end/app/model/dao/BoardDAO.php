@@ -1,6 +1,6 @@
 <?php
-include_once '../entity/Board.php';
-include_once '../core/PDOFactory.php';
+include_once './app/model/entity/Board.php';
+include_once './app/model/core/PDOFactory.php';
 
 class BoardDAO
 {

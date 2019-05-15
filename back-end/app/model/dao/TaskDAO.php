@@ -1,6 +1,6 @@
 <?php
-include_once '../entity/Task.php';
-include_once '../core/PDOFactory.php';
+include_once './app/model/entity/Task.php';
+include_once './app/model/core/PDOFactory.php';
 
 class TaskDAO
 {

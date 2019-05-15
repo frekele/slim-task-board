@@ -1,7 +1,7 @@
 <?php
 
-include_once '../model/entity/Board.php';
-include_once '../model/dao/BoardDAO.php';
+include_once './app/model/entity/Board.php';
+include_once './app/model/dao/BoardDAO.php';
 
 
 class BoardController

@@ -1,7 +1,7 @@
 <?php
 
-include_once '../model/entity/Task.php';
-include_once '../model/dao/TaskDAO.php';
+include_once './app/model/entity/Task.php';
+include_once './app/model/dao/TaskDAO.php';
 
 
 class TaskController

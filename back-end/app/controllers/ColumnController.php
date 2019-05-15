@@ -1,7 +1,7 @@
 <?php
 
-include_once '../model/entity/Column.php';
-include_once '../model/dao/ColumnDAO.php';
+include_once './app/model/entity/Column.php';
+include_once './app/model/dao/ColumnDAO.php';
 
 
 class ColumnController

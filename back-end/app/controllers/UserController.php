@@ -2,8 +2,8 @@
 
 use \Firebase\JWT\JWT;
 
-include_once '../model/entity/User.php';
-include_once '../model/dao/UserDAO.php';
+include_once './app/model/entity/User.php';
+include_once './app/model/dao/UserDAO.php';
 
 class UserController
 {
