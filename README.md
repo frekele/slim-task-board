@@ -1,10 +1,11 @@
-# slim-task-board
+# API
 
 ## USER:
 
 ### POST /auth
 
 ### POST /user
+
 
 ## BOARD:
 
@@ -20,6 +21,7 @@
 
 ### GET /board/{id}?eager=true (find by id Eager-mode)
 
+
 ## COLUMN:
 
 ### POST /column (insert)
@@ -34,7 +36,23 @@
 
 ### GET /column/{id}?eager=true (find by id - Eager-mode)
 
-### GET /column/board/{boardId} (find by board-id)
+### GET /column/board/{boardId} (find by boardId)
 
-### GET /column/board/{boardId}?eager=true (find by board-id - Eager-mode)
+### GET /column/board/{boardId}?eager=true (find by boardId - Eager-mode)
 
+
+## TASK:
+
+### POST /task (insert)
+
+### PUT /task/{id} (update)
+
+### DELETE /task/{id} (delete)
+
+### GET /task (find all)
+
+### GET /task/{id} (find by id)
+
+### GET /task/column/{columnId} (find by columnId)
+
+### GET /task/assigned-user/{assignedUserId} (find by assignedUserId)
