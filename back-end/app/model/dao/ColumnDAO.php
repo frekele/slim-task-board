@@ -62,7 +62,7 @@ class ColumnDAO
         $stmt->bindParam('id', $id);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_OBJ);
-        return new Column($result->id, $result->board_id, $result->name, $result->weight);
+        return ((!$result) ? null : new Column($result->id, $result->board_id, $result->name, $result->weight));
     }
 
     public function findByBoardId($boardId)

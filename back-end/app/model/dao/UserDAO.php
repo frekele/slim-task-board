@@ -62,7 +62,7 @@ class UserDAO
         $stmt->bindParam('id', $id);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_OBJ);
-        return new User($result->id, $result->name, $result->login, $result->password);
+        return ((!$result) ? null : new User($result->id, $result->name, $result->login, $result->password));
     }
 
     public function findByLogin($login)
@@ -73,6 +73,6 @@ class UserDAO
         $stmt->bindParam('login', $login);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_OBJ);
-        return new User($result->id, $result->name, $result->login, $result->password);
+        return ((!$result) ? null : new User($result->id, $result->name, $result->login, $result->password));
     }
 }

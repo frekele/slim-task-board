@@ -60,6 +60,6 @@ class BoardDAO
         $stmt->bindParam('id', $id);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_OBJ);
-        return new Board($result->id, $result->name, $result->description);
+        return ((!$result) ? null : new Board($result->id, $result->name, $result->description));
     }
 }

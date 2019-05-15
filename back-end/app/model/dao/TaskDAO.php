@@ -66,7 +66,7 @@ class TaskDAO
         $stmt->bindParam('id', $id);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_OBJ);
-        return new Task($result->id, $result->column_id, $result->name, $result->weight, $result->description, $result->assigned_user_id);
+        return ((!$result) ? null : new Task($result->id, $result->column_id, $result->name, $result->weight, $result->description, $result->assigned_user_id));
     }
 
     public function findByColumnId($columnId)
