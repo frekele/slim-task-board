@@ -76,8 +76,11 @@ class TaskDAO
         $stmt = $pdo->prepare($query);
         $stmt->bindParam('columnId', $columnId);
         $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_OBJ);
-        return new Task($result->id, $result->columnId, $result->name, $result->weight, $result->description, $result->assignedUserId);
+        $tasks = array();
+        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+            $tasks[] = new Task($row->id, $row->columnId, $row->name, $row->weight, $row->description, $row->assignedUserId);
+        }
+        return $tasks;
     }
 
     public function findByAssignedUserId($assignedUserId)
@@ -87,7 +90,10 @@ class TaskDAO
         $stmt = $pdo->prepare($query);
         $stmt->bindParam('assignedUserId', $assignedUserId);
         $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_OBJ);
-        return new Task($result->id, $result->columnId, $result->name, $result->weight, $result->description, $result->assignedUserId);
+        $tasks = array();
+        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+            $tasks[] = new Task($row->id, $row->columnId, $row->name, $row->weight, $row->description, $row->assignedUserId);
+        }
+        return $tasks;
     }
 }
