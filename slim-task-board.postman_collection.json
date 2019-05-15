@@ -1,0 +1,897 @@
+{
+	"info": {
+		"_postman_id": "994460b1-1144-43ef-a695-a1ad8a47ad45",
+		"name": "slim-task-board",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "USER INSERT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json; charset=utf-8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t \"name\" : \"fulano de tal\",\n     \"login\" : \"fulano\",\n    \"password\" :\"fulano12345\"\n}"
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/user",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USER AUTHENTICATE",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\" : \"fulano\",\n    \"password\" :\"fulano12345\"\n}"
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/auth",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Board",
+			"item": [
+				{
+					"name": "BOARD INSERT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMiIsIm5hbWUiOiJmdWxhbm8gZGUgdGFsIn0.9tRu3kqaw3WEf72I0-cHKPph_Vxg0tKtb1OPg09t-aU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\" :\" my task board teste 4\",\n    \"description\" : \"testing my task board\"\n}"
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/board",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"board"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BOARD UPDATE",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMiIsIm5hbWUiOiJmdWxhbm8gZGUgdGFsIn0.9tRu3kqaw3WEf72I0-cHKPph_Vxg0tKtb1OPg09t-aU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\" :\" my task board teste\",\n    \"description\" : \"testing my task board\"\n}"
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/board/4",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"board",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BOARD DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMiIsIm5hbWUiOiJmdWxhbm8gZGUgdGFsIn0.9tRu3kqaw3WEf72I0-cHKPph_Vxg0tKtb1OPg09t-aU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/board/2",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"board",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BOARD FIND-ALL",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMiIsIm5hbWUiOiJmdWxhbm8gZGUgdGFsIn0.9tRu3kqaw3WEf72I0-cHKPph_Vxg0tKtb1OPg09t-aU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/board",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"board"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BOARD FIND-BY-ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMiIsIm5hbWUiOiJmdWxhbm8gZGUgdGFsIn0.9tRu3kqaw3WEf72I0-cHKPph_Vxg0tKtb1OPg09t-aU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/board/5",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"board",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BOARD FIND-BY-ID-EAGER",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMiIsIm5hbWUiOiJmdWxhbm8gZGUgdGFsIn0.9tRu3kqaw3WEf72I0-cHKPph_Vxg0tKtb1OPg09t-aU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/board/5?eager=true",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"board",
+								"5"
+							],
+							"query": [
+								{
+									"key": "eager",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Column",
+			"item": [
+				{
+					"name": "COLUMN INSERT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMiIsIm5hbWUiOiJmdWxhbm8gZGUgdGFsIn0.9tRu3kqaw3WEf72I0-cHKPph_Vxg0tKtb1OPg09t-aU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"boardId\" : 8,\n    \"name\" : \"DONE\",\n    \"weight\": 5\n}"
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/column",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"column"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "COLUMN UPDATE",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMiIsIm5hbWUiOiJmdWxhbm8gZGUgdGFsIn0.9tRu3kqaw3WEf72I0-cHKPph_Vxg0tKtb1OPg09t-aU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"boardId\" : 8,\n    \"name\" : \"DONE\",\n    \"weight\": 5\n}"
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/column/1",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"column",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "COLUMN DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMiIsIm5hbWUiOiJmdWxhbm8gZGUgdGFsIn0.9tRu3kqaw3WEf72I0-cHKPph_Vxg0tKtb1OPg09t-aU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/column/1",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"column",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "COLUMN FIND-ALL",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMiIsIm5hbWUiOiJmdWxhbm8gZGUgdGFsIn0.9tRu3kqaw3WEf72I0-cHKPph_Vxg0tKtb1OPg09t-aU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/column",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"column"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "COLUMN FIND-BY-ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMiIsIm5hbWUiOiJmdWxhbm8gZGUgdGFsIn0.9tRu3kqaw3WEf72I0-cHKPph_Vxg0tKtb1OPg09t-aU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/column/18",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"column",
+								"18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "COLUMN FIND-BY-ID-EAGER",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMiIsIm5hbWUiOiJmdWxhbm8gZGUgdGFsIn0.9tRu3kqaw3WEf72I0-cHKPph_Vxg0tKtb1OPg09t-aU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/column/18?eager=true",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"column",
+								"18"
+							],
+							"query": [
+								{
+									"key": "eager",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "COLUMN FIND-BY-BOARD-ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMiIsIm5hbWUiOiJmdWxhbm8gZGUgdGFsIn0.9tRu3kqaw3WEf72I0-cHKPph_Vxg0tKtb1OPg09t-aU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/column/board/5",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"column",
+								"board",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "COLUMN FIND-BY-BOARD-ID-EAGER",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMiIsIm5hbWUiOiJmdWxhbm8gZGUgdGFsIn0.9tRu3kqaw3WEf72I0-cHKPph_Vxg0tKtb1OPg09t-aU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/column/board/5?eager=true",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"column",
+								"board",
+								"5"
+							],
+							"query": [
+								{
+									"key": "eager",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Task",
+			"item": [
+				{
+					"name": "TASK INSERT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMiIsIm5hbWUiOiJmdWxhbm8gZGUgdGFsIn0.9tRu3kqaw3WEf72I0-cHKPph_Vxg0tKtb1OPg09t-aU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"columnId\" : 18,\n    \"name\" : \"Fazer teste unitario\",\n    \"weight\": 1,\n    \"description\" : \"bla bla bla\",\n    \"assignedUserId\" : 2\n}"
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/task",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"task"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TASK UPDATE",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMiIsIm5hbWUiOiJmdWxhbm8gZGUgdGFsIn0.9tRu3kqaw3WEf72I0-cHKPph_Vxg0tKtb1OPg09t-aU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"columnId\" : 18,\n    \"name\" : \"Fazer teste unitario\",\n    \"weight\": 1,\n    \"description\" : \"bla bla bla\",\n    \"assignedUserId\" : 2\n}"
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/task/18",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"task",
+								"18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TASK DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMiIsIm5hbWUiOiJmdWxhbm8gZGUgdGFsIn0.9tRu3kqaw3WEf72I0-cHKPph_Vxg0tKtb1OPg09t-aU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/task/2",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"task",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TASK FIND-ALL",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMiIsIm5hbWUiOiJmdWxhbm8gZGUgdGFsIn0.9tRu3kqaw3WEf72I0-cHKPph_Vxg0tKtb1OPg09t-aU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/task",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"task"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TASK FIND-BY-ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMiIsIm5hbWUiOiJmdWxhbm8gZGUgdGFsIn0.9tRu3kqaw3WEf72I0-cHKPph_Vxg0tKtb1OPg09t-aU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/task/10",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"task",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TASK FIND-BY-COLUMN-ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMiIsIm5hbWUiOiJmdWxhbm8gZGUgdGFsIn0.9tRu3kqaw3WEf72I0-cHKPph_Vxg0tKtb1OPg09t-aU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/task/column/18",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"task",
+								"column",
+								"18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TASK FIND-BY-ASSINGNED-USER-ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMiIsIm5hbWUiOiJmdWxhbm8gZGUgdGFsIn0.9tRu3kqaw3WEf72I0-cHKPph_Vxg0tKtb1OPg09t-aU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "slim-task-board.herokuapp.com/task/assigned-user/2",
+							"host": [
+								"slim-task-board",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"task",
+								"assigned-user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
