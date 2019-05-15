@@ -53,7 +53,7 @@ class TaskDAO
         $stmt->execute();
         $tasks = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $tasks[] = new Task($row->id, $row->columnId, $row->name, $row->weight, $row->description, $row->assignedUserId);
+            $tasks[] = new Task($row->id, $row->column_id, $row->name, $row->weight, $row->description, $row->assigned_user_id);
         }
         return $tasks;
     }
@@ -66,7 +66,7 @@ class TaskDAO
         $stmt->bindParam('id', $id);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_OBJ);
-        return new Task($result->id, $result->columnId, $result->name, $result->weight, $result->description, $result->assignedUserId);
+        return new Task($result->id, $result->column_id, $result->name, $result->weight, $result->description, $result->assigned_user_id);
     }
 
     public function findByColumnId($columnId)
@@ -78,7 +78,7 @@ class TaskDAO
         $stmt->execute();
         $tasks = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $tasks[] = new Task($row->id, $row->columnId, $row->name, $row->weight, $row->description, $row->assignedUserId);
+            $tasks[] = new Task($row->id, $row->column_id, $row->name, $row->weight, $row->description, $row->assigned_user_id);
         }
         return $tasks;
     }
@@ -92,7 +92,7 @@ class TaskDAO
         $stmt->execute();
         $tasks = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $tasks[] = new Task($row->id, $row->columnId, $row->name, $row->weight, $row->description, $row->assignedUserId);
+            $tasks[] = new Task($row->id, $row->column_id, $row->name, $row->weight, $row->description, $row->assigned_user_id);
         }
         return $tasks;
     }

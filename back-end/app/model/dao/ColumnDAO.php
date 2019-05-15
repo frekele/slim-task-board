@@ -49,7 +49,7 @@ class ColumnDAO
         $stmt->execute();
         $columns = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $columns[] = new Column($row->id, $row->boardId, $row->name, $row->weight);
+            $columns[] = new Column($row->id, $row->board_id, $row->name, $row->weight);
         }
         return $columns;
     }
@@ -62,7 +62,7 @@ class ColumnDAO
         $stmt->bindParam('id', $id);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_OBJ);
-        return new Column($result->id, $result->boardId, $result->name, $result->weight);
+        return new Column($result->id, $result->board_id, $result->name, $result->weight);
     }
 
     public function findByBoardId($boardId)
@@ -74,7 +74,7 @@ class ColumnDAO
         $stmt->execute();
         $columns = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $columns[] = new Column($row->id, $row->boardId, $row->name, $row->weight);
+            $columns[] = new Column($row->id, $row->board_id, $row->name, $row->weight);
         }
         return $columns;
     }
