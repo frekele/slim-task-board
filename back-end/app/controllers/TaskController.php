@@ -6,18 +6,35 @@ include_once './app/model/dao/TaskDAO.php';
 class TaskController
 {
 
+    private function validate(Task $task)
+    {
+        if (empty($task)) {
+            throw new Exception("'Task' is required!");
+        }
+        if (!$task->columnId) {
+            throw new Exception("columnId 'nome' is required!");
+        }
+        if (!$task->name || !trim($task->name)) {
+            throw new Exception("nameField 'nome' is required!");
+        }
+        if (!$task->weight) {
+            throw new Exception("columnId 'weight' is required!");
+        }
+    }
+
     public function insert($request, $response, $args)
     {
         try {
             $p = $request->getParsedBody();
-            $column = new Task(0, $p['columnId'], $p['name'], $p['weight'], $p['description'], $p['assignedUserId']);
+            $task = new Task(0, $p['columnId'], $p['name'], $p['weight'], $p['description'], $p['assignedUserId']);
+            $this->validate($task);
             $dao = new TaskDAO;
-            $toard = $dao->insert($column);
+            $task = $dao->insert($task);
         } catch (Exception $error) {
             var_dump($error->getMessage());
             return $response->withStatus(500);
         }
-        return $response->withJson($column, 201);
+        return $response->withJson($task, 201);
     }
 
     public function update($request, $response, $args)
@@ -25,14 +42,15 @@ class TaskController
         try {
             $id = $args['id'];
             $p = $request->getParsedBody();
-            $column = new Task($id, $p['columnId'], $p['name'], $p['weight'], $p['description'], $p['assignedUserId']);
+            $task = new Task($id, $p['columnId'], $p['name'], $p['weight'], $p['description'], $p['assignedUserId']);
+            $this->validate($task);
             $dao = new TaskDAO;
-            $column = $dao->update($column);
+            $task = $dao->update($task);
         } catch (Exception $error) {
             var_dump($error->getMessage());
             return $response->withStatus(500);
         }
-        return $response->withJson($column);
+        return $response->withJson($task);
     }
 
     public function delete($request, $response, $args)
@@ -52,12 +70,12 @@ class TaskController
     {
         try {
             $dao = new TaskDAO;
-            $columns = $dao->findAll();
+            $tasks = $dao->findAll();
         } catch (Exception $error) {
             var_dump($error->getMessage());
             return $response->withStatus(500);
         }
-        return $response->withJson($columns);
+        return $response->withJson($tasks);
     }
 
     public function findById($request, $response, $args)
@@ -65,12 +83,12 @@ class TaskController
         try {
             $id = $args['id'];
             $dao = new TaskDAO;
-            $column = $dao->findById($id);
+            $task = $dao->findById($id);
         } catch (Exception $error) {
             var_dump($error->getMessage());
             return $response->withStatus(500);
         }
-        return $response->withJson($column);
+        return $response->withJson($task);
     }
 
     public function findByColumnId($request, $response, $args)
@@ -78,12 +96,12 @@ class TaskController
         try {
             $columnId = $args['columnId'];
             $dao = new TaskDAO;
-            $column = $dao->findByColumnId($columnId);
+            $task = $dao->findByColumnId($columnId);
         } catch (Exception $error) {
             var_dump($error->getMessage());
             return $response->withStatus(500);
         }
-        return $response->withJson($column);
+        return $response->withJson($task);
     }
 
     public function findByAssignedUserId($request, $response, $args)
@@ -91,12 +109,12 @@ class TaskController
         try {
             $assignedUserId = $args['assignedUserId'];
             $dao = new TaskDAO;
-            $column = $dao->findByAssignedUserId($assignedUserId);
+            $task = $dao->findByAssignedUserId($assignedUserId);
         } catch (Exception $error) {
             var_dump($error->getMessage());
             return $response->withStatus(500);
         }
-        return $response->withJson($column);
+        return $response->withJson($task);
     }
 
 }

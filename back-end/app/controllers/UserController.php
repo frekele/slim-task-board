@@ -9,11 +9,28 @@ class UserController
 {
     private $secretKey = "taskboard123456";
 
+    private function validate(User $user)
+    {
+        if (empty($user)) {
+            throw new Exception("'User' is required!");
+        }
+        if (!$user->name || !trim($user->name)) {
+            throw new Exception("nameField 'nome' is required!");
+        }
+        if (!$user->login || !trim($user->login)) {
+            throw new Exception("nameField 'login' is required!");
+        }
+        if (!$user->password || !trim($user->password)) {
+            throw new Exception("nameField 'password' is required!");
+        }
+    }
+
     public function insert($request, $response, $args)
     {
         try {
             $var = $request->getParsedBody();
             $user = new User(0, $var['name'], $var['login'], $var['password']);
+            $this->validate($user);
             $dao = new UserDAO;
             $user = $dao->insert($user);
         } catch (Exception $error) {

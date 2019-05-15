@@ -8,11 +8,22 @@ include_once './app/model/dao/TaskDAO.php';
 class BoardController
 {
 
+    private function validate(Board $board)
+    {
+        if (empty($board)) {
+            throw new Exception("'Board' is required!");
+        }
+        if (!$board->name || !trim($board->name)) {
+            throw new Exception("nameField 'nome' is required!");
+        }
+    }
+
     public function insert($request, $response, $args)
     {
         try {
             $p = $request->getParsedBody();
             $board = new Board(0, $p['name'], $p['description']);
+            $this->validate($board);
             $dao = new BoardDAO;
             $board = $dao->insert($board);
         } catch (Exception $error) {
@@ -28,6 +39,7 @@ class BoardController
             $id = $args['id'];
             $p = $request->getParsedBody();
             $board = new Board($id, $p['name'], $p['description']);
+            $this->validate($board);
             $dao = new BoardDAO;
             $board = $dao->update($board);
         } catch (Exception $error) {

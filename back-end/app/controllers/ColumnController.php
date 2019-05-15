@@ -7,11 +7,28 @@ include_once './app/model/dao/TaskDAO.php';
 class ColumnController
 {
 
+    private function validate(Column $column)
+    {
+        if (empty($column)) {
+            throw new Exception("'Column' is required!");
+        }
+        if (!$column->boardId) {
+            throw new Exception("nameField 'boardId' is required!");
+        }
+        if (!$column->name || !trim($column->name)) {
+            throw new Exception("nameField 'nome' is required!");
+        }
+        if (!$column->weight) {
+            throw new Exception("nameField 'weight' is required!");
+        }
+    }
+
     public function insert($request, $response, $args)
     {
         try {
             $p = $request->getParsedBody();
             $column = new Column(0, $p['boardId'], $p['name'], $p['weight']);
+            $this->validate($column);
             $dao = new ColumnDAO;
             $toard = $dao->insert($column);
         } catch (Exception $error) {
@@ -27,6 +44,7 @@ class ColumnController
             $id = $args['id'];
             $p = $request->getParsedBody();
             $column = new Column($id, $p['boardId'], $p['name'], $p['weight']);
+            $this->validate($column);
             $dao = new ColumnDAO;
             $column = $dao->update($column);
         } catch (Exception $error) {
