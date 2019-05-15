@@ -6,7 +6,7 @@ class TaskDAO
 {
     public function insert(Task $task)
     {
-        $query = "INSERT INTO task(column_id,name,weight,description,assigned_user_id) VALUES (:columnId,:name,:weight,:description,:assignedUserId)";
+        $query = "INSERT INTO slim_task(column_id,name,weight,description,assigned_user_id) VALUES (:columnId,:name,:weight,:description,:assignedUserId)";
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":columnId", $task->columnId);
@@ -21,7 +21,7 @@ class TaskDAO
 
     public function delete($id)
     {
-        $query = "DELETE from task WHERE id=:id";
+        $query = "DELETE from slim_task WHERE id=:id";
         $task = $this->findById($id);
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
@@ -32,7 +32,7 @@ class TaskDAO
 
     public function update(Task $task)
     {
-        $query = "UPDATE task SET column_id=:columnId, name=:name, weight=:weight, description=:description, assigned_user_id=:assignedUserId WHERE id=:id";
+        $query = "UPDATE slim_task SET column_id=:columnId, name=:name, weight=:weight, description=:description, assigned_user_id=:assignedUserId WHERE id=:id";
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":id", $task->id);
@@ -47,7 +47,7 @@ class TaskDAO
 
     public function findAll()
     {
-        $query = 'SELECT * FROM task';
+        $query = 'SELECT * FROM slim_task';
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->execute();
@@ -60,7 +60,7 @@ class TaskDAO
 
     public function findById($id)
     {
-        $query = 'SELECT * FROM task WHERE id=:id';
+        $query = 'SELECT * FROM slim_task WHERE id=:id';
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam('id', $id);
@@ -71,7 +71,7 @@ class TaskDAO
 
     public function findByColumnId($columnId)
     {
-        $query = 'SELECT * FROM task WHERE column_id=:columnId';
+        $query = 'SELECT * FROM slim_task WHERE column_id=:columnId';
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam('columnId', $columnId);
@@ -82,7 +82,7 @@ class TaskDAO
 
     public function findByAssignedUserId($assignedUserId)
     {
-        $query = 'SELECT * FROM task WHERE assigned_user_id=:assignedUserId';
+        $query = 'SELECT * FROM slim_task WHERE assigned_user_id=:assignedUserId';
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam('assignedUserId', $assignedUserId);

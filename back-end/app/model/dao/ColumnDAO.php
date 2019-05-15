@@ -6,7 +6,7 @@ class ColumnDAO
 {
     public function insert(Column $column)
     {
-        $query = "INSERT INTO column(board_id,name,weight) VALUES (:boardId,:name,:weight)";
+        $query = "INSERT INTO slim_column(board_id,name,weight) VALUES (:boardId,:name,:weight)";
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":boardId", $column->boardId);
@@ -19,7 +19,7 @@ class ColumnDAO
 
     public function delete($id)
     {
-        $query = "DELETE from column WHERE id=:id";
+        $query = "DELETE from slim_column WHERE id=:id";
         $column = $this->findById($id);
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
@@ -30,7 +30,7 @@ class ColumnDAO
 
     public function update(Column $column)
     {
-        $query = "UPDATE column SET board_id=:boardId, name=:name, weight=:weight WHERE id=:id";
+        $query = "UPDATE slim_column SET board_id=:boardId, name=:name, weight=:weight WHERE id=:id";
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":id", $column->id);
@@ -43,7 +43,7 @@ class ColumnDAO
 
     public function findAll()
     {
-        $query = 'SELECT * FROM column';
+        $query = 'SELECT * FROM slim_column';
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->execute();
@@ -56,7 +56,7 @@ class ColumnDAO
 
     public function findById($id)
     {
-        $query = 'SELECT * FROM column WHERE id=:id';
+        $query = 'SELECT * FROM slim_column WHERE id=:id';
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam('id', $id);
@@ -67,7 +67,7 @@ class ColumnDAO
 
     public function findByBoardId($boardId)
     {
-        $query = 'SELECT * FROM column WHERE board_id=:boardId';
+        $query = 'SELECT * FROM slim_column WHERE board_id=:boardId';
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam('boardId', $boardId);

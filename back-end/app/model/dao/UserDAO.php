@@ -6,7 +6,7 @@ class UserDAO
 {
     public function insert(User $user)
     {
-        $query = "INSERT INTO users(name,login,password) VALUES (:name,:login,:password)";
+        $query = "INSERT INTO slim_user(name,login,password) VALUES (:name,:login,:password)";
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":name", $user->name);
@@ -19,7 +19,7 @@ class UserDAO
 
     public function delete($id)
     {
-        $query = "DELETE from users WHERE id=:id";
+        $query = "DELETE from slim_user WHERE id=:id";
         $user = $this->findById($id);
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
@@ -30,7 +30,7 @@ class UserDAO
 
     public function update(User $user)
     {
-        $query = "UPDATE users SET name=:name, login=:login, password=:password WHERE id=:id";
+        $query = "UPDATE slim_user SET name=:name, login=:login, password=:password WHERE id=:id";
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":id", $user->id);
@@ -43,7 +43,7 @@ class UserDAO
 
     public function findAll()
     {
-        $query = 'SELECT * FROM users';
+        $query = 'SELECT * FROM slim_user';
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->execute();
@@ -56,7 +56,7 @@ class UserDAO
 
     public function findById($id)
     {
-        $query = 'SELECT * FROM users WHERE id=:id';
+        $query = 'SELECT * FROM slim_user WHERE id=:id';
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam('id', $id);
@@ -67,7 +67,7 @@ class UserDAO
 
     public function findByLogin($login)
     {
-        $query = 'SELECT * FROM users WHERE login=:login';
+        $query = 'SELECT * FROM slim_user WHERE login=:login';
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam('login', $login);

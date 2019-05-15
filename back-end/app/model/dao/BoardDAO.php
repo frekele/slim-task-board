@@ -6,7 +6,7 @@ class BoardDAO
 {
     public function insert(Board $board)
     {
-        $query = "INSERT INTO board(name,description) VALUES (:name,:description)";
+        $query = "INSERT INTO slim_board(name,description) VALUES (:name,:description)";
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":name", $board->name);
@@ -18,7 +18,7 @@ class BoardDAO
 
     public function delete($id)
     {
-        $query = "DELETE from board WHERE id=:id";
+        $query = "DELETE from slim_board WHERE id=:id";
         $board = $this->findById($id);
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
@@ -29,7 +29,7 @@ class BoardDAO
 
     public function update(Board $board)
     {
-        $query = "UPDATE board SET name=:name, description=:description WHERE id=:id";
+        $query = "UPDATE slim_board SET name=:name, description=:description WHERE id=:id";
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":id", $board->id);
@@ -41,7 +41,7 @@ class BoardDAO
 
     public function findAll()
     {
-        $query = 'SELECT * FROM board';
+        $query = 'SELECT * FROM slim_board';
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->execute();
@@ -54,7 +54,7 @@ class BoardDAO
 
     public function findById($id)
     {
-        $query = 'SELECT * FROM board WHERE id=:id';
+        $query = 'SELECT * FROM slim_board WHERE id=:id';
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam('id', $id);
