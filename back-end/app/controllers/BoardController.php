@@ -15,6 +15,7 @@ class BoardController
             $dao = new BoardDAO;
             $board = $dao->insert($board);
         } catch (Exception $error) {
+            var_dump($error->getMessage());
             return $response->withStatus(500);
         }
         return $response->withJson($board, 201);
@@ -29,6 +30,7 @@ class BoardController
             $dao = new BoardDAO;
             $board = $dao->update($board);
         } catch (Exception $error) {
+            var_dump($error->getMessage());
             return $response->withStatus(500);
         }
         return $response->withJson($board);
@@ -41,6 +43,7 @@ class BoardController
             $dao = new BoardDAO;
             $board = $dao->delete($id);
         } catch (Exception $error) {
+            var_dump($error->getMessage());
             return $response->withStatus(500);
         }
         return $response->withJson($board);
@@ -52,6 +55,7 @@ class BoardController
             $dao = new BoardDAO;
             $boards = $dao->findAll();
         } catch (Exception $error) {
+            var_dump($error->getMessage());
             return $response->withStatus(500);
         }
         return $response->withJson($boards);
@@ -64,6 +68,7 @@ class BoardController
             $dao = new BoardDAO;
             $board = $dao->findById($id);
         } catch (Exception $error) {
+            var_dump($error->getMessage());
             return $response->withStatus(500);
         }
         return $response->withJson($board);

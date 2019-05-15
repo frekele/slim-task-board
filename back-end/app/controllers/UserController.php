@@ -17,6 +17,7 @@ class UserController
             $dao = new UserDAO;
             $user = $dao->insert($user);
         } catch (Exception $error) {
+            var_dump($error->getMessage());
             return $response->withStatus(500);
         }
         return $response->withJson($user, 201);
@@ -48,6 +49,7 @@ class UserController
                 if ($decoded)
                     return ($next($request, $response));
             } catch (Exception $error) {
+                var_dump($error->getMessage());
                 return $response->withStatus(401);
             }
         }

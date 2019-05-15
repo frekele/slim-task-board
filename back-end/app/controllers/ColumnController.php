@@ -15,6 +15,7 @@ class ColumnController
             $dao = new ColumnDAO;
             $toard = $dao->insert($column);
         } catch (Exception $error) {
+            var_dump($error->getMessage());
             return $response->withStatus(500);
         }
         return $response->withJson($column, 201);
@@ -29,6 +30,7 @@ class ColumnController
             $dao = new ColumnDAO;
             $column = $dao->update($column);
         } catch (Exception $error) {
+            var_dump($error->getMessage());
             return $response->withStatus(500);
         }
         return $response->withJson($column);
@@ -41,6 +43,7 @@ class ColumnController
             $dao = new ColumnDAO;
             $column = $dao->delete($id);
         } catch (Exception $error) {
+            var_dump($error->getMessage());
             return $response->withStatus(500);
         }
         return $response->withJson($column);
@@ -52,6 +55,7 @@ class ColumnController
             $dao = new ColumnDAO;
             $columns = $dao->findAll();
         } catch (Exception $error) {
+            var_dump($error->getMessage());
             return $response->withStatus(500);
         }
         return $response->withJson($columns);
@@ -64,6 +68,7 @@ class ColumnController
             $dao = new ColumnDAO;
             $column = $dao->findById($id);
         } catch (Exception $error) {
+            var_dump($error->getMessage());
             return $response->withStatus(500);
         }
         return $response->withJson($column);
@@ -76,6 +81,7 @@ class ColumnController
             $dao = new ColumnDAO;
             $column = $dao->findByBoardId($boardId);
         } catch (Exception $error) {
+            var_dump($error->getMessage());
             return $response->withStatus(500);
         }
         return $response->withJson($column);
