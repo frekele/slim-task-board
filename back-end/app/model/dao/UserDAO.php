@@ -20,7 +20,7 @@ class UserDAO
     public function delete($id)
     {
         $query = "DELETE from users WHERE id=:id";
-        $user = $this->buscarPorId($id);
+        $user = $this->findById($id);
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":id", $id);

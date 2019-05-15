@@ -20,7 +20,7 @@ class ColumnDAO
     public function delete($id)
     {
         $query = "DELETE from column WHERE id=:id";
-        $column = $this->buscarPorId($id);
+        $column = $this->findById($id);
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":id", $id);

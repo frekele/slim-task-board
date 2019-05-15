@@ -19,7 +19,7 @@ class BoardDAO
     public function delete($id)
     {
         $query = "DELETE from board WHERE id=:id";
-        $board = $this->buscarPorId($id);
+        $board = $this->findById($id);
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":id", $id);

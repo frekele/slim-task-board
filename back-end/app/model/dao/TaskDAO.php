@@ -22,7 +22,7 @@ class TaskDAO
     public function delete($id)
     {
         $query = "DELETE from task WHERE id=:id";
-        $task = $this->buscarPorId($id);
+        $task = $this->findById($id);
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":id", $id);
