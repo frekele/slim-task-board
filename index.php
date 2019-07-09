@@ -22,7 +22,7 @@ $app = new \Slim\App($config);
 //User
 $app->post('/sign-in', 'UserController:authenticate');
 $app->post('/sign-up', 'UserController:insert');
-$app->get('/validate-token', 'UserController:validateTokenAndFindUser');
+$app->post('/validate-token', 'UserController:validateTokenAndFindUser');
 
 //Board
 $app->group('/board', function () use ($app) {

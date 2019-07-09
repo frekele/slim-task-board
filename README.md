@@ -6,7 +6,7 @@
 
 ### POST /sign-up
 
-### GET /validate-token
+### POST /validate-token
 
 
 ## BOARD:
