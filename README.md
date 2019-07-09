@@ -2,9 +2,11 @@
 
 ## USER:
 
-### POST /auth
+### POST /sign-in
 
-### POST /user
+### POST /sign-up
+
+### GET /validate-token
 
 
 ## BOARD:

@@ -20,8 +20,9 @@ $config = [
 $app = new \Slim\App($config);
 
 //User
-$app->post('/auth', 'UserController:authenticate');
-$app->post('/user', 'UserController:insert');
+$app->post('/sign-in', 'UserController:authenticate');
+$app->post('/sign-up', 'UserController:insert');
+$app->get('/validate-token', 'UserController:validateTokenAndFindUser');
 
 //Board
 $app->group('/board', function () use ($app) {
@@ -54,6 +55,19 @@ $app->group('/task', function () use ($app) {
     $app->get('/column/{columnId}', 'TaskController:findByColumnId');
     $app->get('/assigned-user/{assignedUserId}', 'TaskController:findByAssignedUserId');
 })->add('UserController:tokenValidate');
+
+
+$app->options('/{routes:.+}', function ($request, $response, $args) {
+    return $response;
+});
+
+$app->add(function ($req, $res, $next) {
+    $response = $next($req, $res);
+    return $response
+        ->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+});
 
 
 $app->run();

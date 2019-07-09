@@ -78,4 +78,39 @@ class UserController
         }
         return $response->withStatus(401);
     }
+
+    public function validateTokenAndFindUser($request, $response, $next)
+    {
+        $token = $request->getHeader('Authorization')[0];
+        if ($token) {
+            try {
+                $decoded = JWT::decode($token, $this->secretKey, array('HS256'));
+                if ($decoded) {
+                    $decoded_array = (array)$decoded;
+                    $id = $decoded_array['user'];
+                    $dao = new UserDAO;
+                    $user = $dao->findById($id);
+                    return $response->withJson($user);
+                }
+            } catch (Exception $error) {
+                var_dump($error->getMessage());
+                return $response->withStatus(401);
+            }
+        }
+        return $response->withStatus(401);
+    }
+
+
+    public function findById($request, $response, $args)
+    {
+        try {
+            $id = $args['id'];
+            $dao = new UserDAO;
+            $user = $dao->findById($id);
+        } catch (Exception $error) {
+            var_dump($error->getMessage());
+            return $response->withStatus(500);
+        }
+        return $response->withJson($user);
+    }
 }
