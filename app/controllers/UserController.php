@@ -79,7 +79,7 @@ class UserController
         return $response->withStatus(401);
     }
 
-    public function validateTokenAndFindUser($request, $response, $next)
+    public function validateTokenAndFindUser($request, $response, $args)
     {
         $token = $request->getHeader('Authorization')[0];
         if ($token) {
@@ -90,7 +90,11 @@ class UserController
                     $id = $decoded_array['user'];
                     $dao = new UserDAO;
                     $user = $dao->findById($id);
-                    return $response->withJson($user);
+                    if ($user && $user->id) {
+                        $user->token = $token;
+                        $user->password = null;
+                        return $response->withJson($user);
+                    }
                 }
             } catch (Exception $error) {
                 var_dump($error->getMessage());

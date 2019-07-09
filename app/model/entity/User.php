@@ -6,6 +6,7 @@ class User
     public $name;
     public $login;
     public $password;
+    public $token = null;
 
     function __construct($id, $name, $login, $password)
     {
