@@ -67,7 +67,6 @@ class BoardController
         try {
             $dao = new BoardDAO;
             $boards = $dao->findAll();
-            var_dump($dao);
         } catch (Exception $error) {
             var_dump($error->getMessage());
             return $response->withStatus(500);
