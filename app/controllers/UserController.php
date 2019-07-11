@@ -17,8 +17,8 @@ class UserController
         if (!$user->name || !trim($user->name)) {
             throw new Exception("nameField 'nome' is required!");
         }
-        if (!$user->login || !trim($user->login)) {
-            throw new Exception("nameField 'login' is required!");
+        if (!$user->email || !trim($user->email)) {
+            throw new Exception("nameField 'email' is required!");
         }
         if (!$user->password || !trim($user->password)) {
             throw new Exception("nameField 'password' is required!");
@@ -29,13 +29,13 @@ class UserController
     {
         try {
             $var = $request->getParsedBody();
-            $user = new User(0, $var['name'], $var['login'], $var['password']);
+            $user = new User(0, $var['name'], $var['email'], $var['password']);
             $this->validate($user);
             $dao = new UserDAO;
 
-            $userExist = $dao->findByLogin($var['login']);
+            $userExist = $dao->findByEmail($var['email']);
             if ($userExist) {
-                throw new Exception("This login already exists!");
+                throw new Exception("This email already exists!");
             } else {
                 $user = $dao->insert($user);
             }
@@ -50,7 +50,7 @@ class UserController
     {
         $user = $request->getParsedBody();
         $dao = new UserDAO;
-        $userReturn = $dao->findByLogin($user['login']);
+        $userReturn = $dao->findByEmail($user['email']);
         if ($userReturn->password == $user['password']) {
             $token = array(
                 'user' => strval($userReturn->id),

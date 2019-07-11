@@ -22,7 +22,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t \"name\" : \"fulano de tal\",\n     \"login\" : \"fulano\",\n    \"password\" :\"fulano12345\"\n}"
+							"raw": "{\n\t \"name\" : \"fulano de tal\",\n     \"email\" : \"fulano\",\n    \"password\" :\"fulano12345\"\n}"
 						},
 						"url": {
 							"raw": "slim-task-board.herokuapp.com/sign-up",
@@ -52,7 +52,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"login\" : \"fulano\",\n    \"password\" :\"fulano12345\"\n}"
+							"raw": "{\n    \"email\" : \"fulano\",\n    \"password\" :\"fulano12345\"\n}"
 						},
 						"url": {
 							"raw": "slim-task-board.herokuapp.com/sign-in",

@@ -6,11 +6,11 @@ class UserDAO
 {
     public function insert(User $user)
     {
-        $query = "INSERT INTO slim_user(name,login,password) VALUES (:name,:login,:password)";
+        $query = "INSERT INTO slim_user(name,email,password) VALUES (:name,:email,:password)";
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":name", $user->name);
-        $stmt->bindParam(":login", $user->login);
+        $stmt->bindParam(":email", $user->email);
         $stmt->bindParam(":password", $user->password);
         $stmt->execute();
         $user->id = $pdo->lastInsertId();
@@ -30,12 +30,12 @@ class UserDAO
 
     public function update(User $user)
     {
-        $query = "UPDATE slim_user SET name=:name, login=:login, password=:password WHERE id=:id";
+        $query = "UPDATE slim_user SET name=:name, email=:email, password=:password WHERE id=:id";
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":id", $user->id);
         $stmt->bindParam(":name", $user->name);
-        $stmt->bindParam(":login", $user->login);
+        $stmt->bindParam(":email", $user->email);
         $stmt->bindParam(":password", $user->password);
         $stmt->execute();
         return $user;
@@ -49,7 +49,7 @@ class UserDAO
         $stmt->execute();
         $users = array();
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $users[] = new User($row->id, $row->name, $row->login, $row->password);
+            $users[] = new User($row->id, $row->name, $row->email, $row->password);
         }
         return $users;
     }
@@ -62,17 +62,17 @@ class UserDAO
         $stmt->bindParam('id', $id);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_OBJ);
-        return ((!$result) ? null : new User($result->id, $result->name, $result->login, $result->password));
+        return ((!$result) ? null : new User($result->id, $result->name, $result->email, $result->password));
     }
 
-    public function findByLogin($login)
+    public function findByEmail($email)
     {
-        $query = 'SELECT * FROM slim_user WHERE login=:login';
+        $query = 'SELECT * FROM slim_user WHERE email=:email';
         $pdo = PDOFactory::getConnection();
         $stmt = $pdo->prepare($query);
-        $stmt->bindParam('login', $login);
+        $stmt->bindParam('email', $email);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_OBJ);
-        return ((!$result) ? null : new User($result->id, $result->name, $result->login, $result->password));
+        return ((!$result) ? null : new User($result->id, $result->name, $result->email, $result->password));
     }
 }
