@@ -12,13 +12,13 @@ class TaskController
             throw new Exception("'Task' is required!");
         }
         if (!$task->columnId) {
-            throw new Exception("columnId 'nome' is required!");
+            throw new Exception("nameField 'columnId' is required!");
         }
         if (!$task->name || !trim($task->name)) {
             throw new Exception("nameField 'nome' is required!");
         }
         if (!$task->weight) {
-            throw new Exception("columnId 'weight' is required!");
+            throw new Exception("nameField 'weight' is required!");
         }
     }
 
