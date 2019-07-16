@@ -26,6 +26,17 @@ class BoardController
             $this->validate($board);
             $dao = new BoardDAO;
             $board = $dao->insert($board);
+
+            $boardId = $board->id;
+            $columnDAO = new ColumnDAO;
+            $column1 = new Column(0, $boardId, "TODO", 1);
+            $column2 = new Column(0, $boardId, "In Progress", 2);
+            $column3 = new Column(0, $boardId, "Done", 3);
+
+            $columnDAO->insert($column1);
+            $columnDAO->insert($column2);
+            $columnDAO->insert($column3);
+
         } catch (Exception $error) {
             var_dump($error->getMessage());
             return $response->withStatus(500);
